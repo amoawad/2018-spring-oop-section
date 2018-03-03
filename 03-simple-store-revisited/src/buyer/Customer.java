@@ -1,17 +1,19 @@
 package buyer;
 
+import payment.Cash;
+import payment.PaymentMethod;
 import store.Product;
 
 public class Customer {
 
     private String name;
-    private int balance;
     private Cart cart;
+    protected PaymentMethod paymentMethod;
 
-    public Customer(String name, int balance) {
+    public Customer(String name) {
         this.name = name;
-        this.balance = balance;
         this.cart = new Cart();
+        this.paymentMethod = new Cash(100);
     }
 
     public void purchase(Product p) {
@@ -24,5 +26,9 @@ public class Customer {
 
     public String getName() {
         return name;
+    }
+
+    public void pay(double amount) {
+        paymentMethod.pay(amount);
     }
 }
